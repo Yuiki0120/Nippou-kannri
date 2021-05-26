@@ -57,6 +57,10 @@ public class Employee {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
+    @Column(name = "yoine", nullable=false)
+    private Integer yoine;
+
+
     public Integer getId() {
         return id;
     }
@@ -119,6 +123,14 @@ public class Employee {
 
     public void setDelete_flag(Integer delete_flag) {
         this.delete_flag = delete_flag;
+    }
+
+    public Integer getYoine(){
+        return yoine;
+    }
+
+    public void setYoine(Integer yoine){
+        this.yoine=yoine;
     }
 }
 
