@@ -58,7 +58,7 @@ public class Employee {
     private Integer delete_flag;
 
     @Column(name = "yoine", nullable=false)
-    private Integer yoine;
+    private Integer yoineCount;
 
 
     public Integer getId() {
@@ -125,12 +125,12 @@ public class Employee {
         this.delete_flag = delete_flag;
     }
 
-    public Integer getYoine(){
-        return yoine;
+    public Integer getYoineCount(){
+        return yoineCount;
     }
 
-    public void setYoine(Integer yoine){
-        this.yoine=yoine;
+    public void setYoineCount(Integer yoineCount){
+        this.yoineCount=yoineCount;
     }
 }
 
