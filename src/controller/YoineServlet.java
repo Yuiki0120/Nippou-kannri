@@ -36,18 +36,19 @@ public class YoineServlet extends HttpServlet {
         ServletContext sc = this.getServletContext();
         Yoine y = (Yoine) sc.getAttribute("yoine");
 
-        if (y == null) {
+        if(y == null) {
             y = new Yoine();
             sc.setAttribute("yoine", y);
         }
 
-        request.setCharacterEncoding("UTF-8");
-        String yoine = request.getParameter("action");
+            request.setCharacterEncoding("UTF-8");
+            String yoine = request.getParameter("action");
 
         if (yoine != null) {
 
             YoineLogic yl = new YoineLogic();
             yl.yoinePlus(y);
+
             sc.setAttribute("yoine", y);
         }
 
