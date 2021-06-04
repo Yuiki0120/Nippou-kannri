@@ -62,7 +62,7 @@ public class Report {
     private Timestamp updated_at;
 
     @Column(name = "yoine" , nullable = false)
-    private Integer yoineCount;
+    private Integer yoine;
 
     public Integer getId() {
         return id;
@@ -112,19 +112,19 @@ public class Report {
         this.created_at = created_at;
     }
 
-    public Timestamp getUpdated_at() {
+    public Timestamp getUpdated_at(){
         return updated_at;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
+    public void setUpdated_at(Timestamp updated_at){
         this.updated_at = updated_at;
     }
 
-    public Integer getYoineCount(){
-        return yoineCount;
+    public Integer getYoine(){
+        return yoine;
     }
 
-    public void setYoineCount(Integer yoineCount){
-        this.yoineCount = yoineCount;
+    public void setYoine(Integer yoine){
+        this.yoine = yoine;
     }
 }

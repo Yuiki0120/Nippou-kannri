@@ -2,23 +2,24 @@ package controller;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Yoine;
-import models.YoineLogic;
+import models.Report;
+import utils.DBUtil;
 
 /**
  * Servlet implementation class YoineServlet
  */
-@WebServlet("/YoineServlet")
+@WebServlet("/yoine")
 public class YoineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,41 +29,45 @@ public class YoineServlet extends HttpServlet {
     }
 
     /**
+     * @param yoine
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
-        ServletContext sc = this.getServletContext();
-        Yoine y = (Yoine) sc.getAttribute("yoine");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, int yoine) throws ServletException, IOException {
+        EntityManager em = DBUtil.createEntityManager();
+        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("yoine")));
 
-        if(y == null) {
-            y = new Yoine();
-            sc.setAttribute("yoine", y);
-        }
+        int s = r.getYoine();
+        s++;
+        System.out.println(s);
 
-            request.setCharacterEncoding("UTF-8");
-            String yoine = request.getParameter("action");
+        request.setAttribute("yoine",s);
 
-        if (yoine != null) {
+        r.setYoine(s);;
 
-            YoineLogic yl = new YoineLogic();
-            yl.yoinePlus(y);
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+        em.close();
+        response.sendRedirect(request.getContextPath() + "/show");
 
-            sc.setAttribute("yoine", y);
-        }
-
-        RequestDispatcher rd = request.getRequestDispatcher("/yoineView.jsp");
-        rd.forward(request, response);
-
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
+        rd.forward(request,response);
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String yoine = request.getParameter("yoine");
+        if(yoine!= null && yoine.equals(request.getSession().getId())) {
+            EntityManager em = DBUtil.createEntityManager();
+            Report m = em.find(Report.class,(request.getSession().getAttribute("yoine")));
+            String title = request.getParameter("title");
+            m.setTitle(title);
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            String content = request.getParameter("content");
+            m.setContent(content);
 
-    }
+            em.getTransaction().begin();
+            em.getTransaction().commit();
+            em.close();
 
-}
+            response.sendRedirect(request.getContextPath() + "/show");
+        }
+    }}

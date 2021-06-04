@@ -30,18 +30,22 @@ public class ReportsShowServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
-
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        Integer yoine = r.getYoine();
 
         em.close();
-
         request.setAttribute("report", r);
         request.setAttribute("_token", request.getSession().getId());
+        request.setAttribute("yoine",yoine);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
         rd.forward(request, response);
     }
 
+
 }
+
+

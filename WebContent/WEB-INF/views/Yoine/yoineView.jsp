@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <meta charset="UTF-8">
 <style type="text/css">
 <!--
@@ -11,17 +12,13 @@
    div.ta2 {text-align: right;}
    div.ta3 {text-align: justify;}
 -->
+https://digitalidentity.co.jp/blog/wp/wp-content/uploads/2020/06/code-sample1.png
 </style>
-<title>いいねこ！！！</title>
+<title>いいね</title>
 </head>
 <body>
+<i class="fas fa-hand-holding-heart"></i>
 <div class="ta1">
-<p><a href="/iine/YoineServlet?action=yoine">
-<img src="/iine/finger-163689_640.jpg" alt="いいね！" width="300" height="200"></a>
-<a href="/iine/YoineServlet?action=yoine">
-<img src="/iine/2cat-323262_1280.jpg" alt="いいね！" width="300" height="200"></a>
-</p>
-<p><font size="5"><b>いいねこ！：${yoine.yoineCount}</b></font></p>
 </div>
 </body>
 </html>
