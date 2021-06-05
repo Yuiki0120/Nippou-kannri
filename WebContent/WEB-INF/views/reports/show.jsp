@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
                 </html>
-                <p><a  href="<c:url value="/reports/show?yoine=${report.yoine}"/> "><i class="fas fa-hand-holding-heart"></i></a></p>
+                <p><a  href="<c:url value="/yoine?id=${report.id}"/> "><i class="fas fa-hand-holding-heart"></i></a></p>
                 <p><c:out value="${yoine}"/></p>
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>

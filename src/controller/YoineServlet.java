@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,9 +32,9 @@ public class YoineServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response, int yoine) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("yoine")));
+        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
 
         int s = r.getYoine();
         s++;
@@ -48,10 +47,9 @@ public class YoineServlet extends HttpServlet {
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
-        response.sendRedirect(request.getContextPath() + "/show");
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
-        rd.forward(request,response);
+        response.sendRedirect(request.getContextPath() + "/reports/show?id="+ r.getId());
+
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String yoine = request.getParameter("yoine");
